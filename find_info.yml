@@ -1,0 +1,24 @@
+---
+- hosts: ios-prod
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: RUN cli_command ON CISCO IOS AND SHOW RESULT
+      block:
+      - name: RUN cli_command ON CISCO IOS
+        cli_command:
+          command: show ip int br
+        register: result
+
+      - name: SHOW RESULT
+        debug:
+          var: result.stdout_lines
+      when: ansible_network_os == 'ios'
+
+    - name: Backup current switch config (ios)
+      ios_config:
+        backup: yes
+        save_when: always
+      register: backup_ios_location
+      when: ansible_network_os == 'ios'
