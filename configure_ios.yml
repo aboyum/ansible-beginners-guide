@@ -1,0 +1,15 @@
+---
+- hosts: ios-test
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: CONFIGURE HOSTS (ios)
+      ios_config:
+        commands:
+          - username newuser secret newpassword
+          - snmp-server location TESTLAB1
+        backup: yes
+        save_when: always
+      register: backup_ios_location
+      when: ansible_network_os == 'ios'
