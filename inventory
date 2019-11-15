@@ -1,0 +1,15 @@
+[ios-test]
+R1 ansible_host=10.0.3.201
+
+[ios-test:vars]
+ansible_network_os=ios
+username=testuser1
+password=password1
+
+[ios-prod]
+R1 ansible_host=10.0.3.202
+
+[ios-prod:vars]
+ansible_network_os=ios
+username=testuser1
+password=password1
